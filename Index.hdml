@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MohdVaish AI 35</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 20px;
+      background: #0b1020;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+    .app {
+      max-width: 500px;
+      margin: 30px auto;
+      padding: 24px;
+      border-radius: 20px;
+      background: #171f35;
+    }
+    h1 { text-align: center; color: #8b9dff; }
+    p { text-align: center; color: #cbd5e1; }
+    textarea, input, button {
+      width: 100%;
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+    textarea, input {
+      background: #0b1020;
+      color: white;
+      border: 1px solid #475569;
+    }
+    button {
+      border: 0;
+      background: #6657ff;
+      color: white;
+      font-weight: bold;
+    }
+    #preview { max-width: 100%; margin-top: 15px; }
+    #status { overflow-wrap: anywhere; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <h1>MohdVaish AI 35</h1>
+    <p>Your AI Video Creator</p>
+
+    <textarea id="prompt" rows="4"
+      placeholder="Describe your video idea..."></textarea>
+
+    <label for="image">Upload an image (optional)</label>
+    <input id="image" type="file" accept="image/*">
+
+    <img id="preview" alt="Image preview" hidden>
+
+    <button id="create">Create Video</button>
+    <p id="status">Enter your idea to get started.</p>
+  </div>
+
+  <script>
+    const image = document.getElementById('image');
+    const preview = document.getElementById('preview');
+    const prompt = document.getElementById('prompt');
+    const status = document.getElementById('status');
+
+    image.addEventListener('change', () => {
+      const file = image.files[0];
+      if (file) {
+        preview.src = URL.createObjectURL(file);
+        preview.hidden = false;
+      }
+    });
+
+    document.getElementById('create').addEventListener('click', () => {
+      if (!prompt.value.trim() && !image.files.length) {
+        status.textContent = 'Please enter a video idea or upload an image.';
+        return;
+      }
+      status.textContent =
+        'Your idea is ready! Connect an AI video generation API to generate a real video.';
+    });
+  </script>
+</body>
+</html>
